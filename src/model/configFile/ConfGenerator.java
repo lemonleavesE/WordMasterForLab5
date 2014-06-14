@@ -12,6 +12,12 @@ import java.util.Map;
 
 public class ConfGenerator 
 {
+	
+	public static void main(String [] a) throws IOException
+	{
+		generateConfig();
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public static void generateConfig() throws IOException
 	{
@@ -120,7 +126,7 @@ public class ConfGenerator
 			readerConf.writeUTF(info[1]);						//写入中文释义
 		} 
 		
-		/*test
+		
 		readerConf.seek(0);
 		long temp = readerConf.readLong();
 		while(readerConf.getFilePointer()<temp)
@@ -140,7 +146,7 @@ public class ConfGenerator
 			System.out.print(readerConf.readUTF()+"-");
 			System.out.println(readerConf.readUTF());
 		}
-		*/
+		
 		readerConf.close();
 		readerDict.close();
 	}
