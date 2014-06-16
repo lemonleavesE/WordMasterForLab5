@@ -118,7 +118,6 @@ public class DicXMLHandler {
 	        		temp.lexName = lexName;
 	        		lexMap.put(lexName, temp);
 	        	}
-	        	
 	        }
 	        
 		} catch (Exception e) {

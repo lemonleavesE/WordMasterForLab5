@@ -104,19 +104,25 @@ public class ConfGeneratorForXML {
 			
 			List<WordTemp> wordList = lexicon.wordList;
 			
-			for(WordTemp wt : wordList)
+			int wListLength = wordList.size();
+			
+			for(int i = 0;i < wListLength;i++)
 			{
+				WordTemp wt = wordList.get(i);
 				readerConf.writeLong(readerConf.getFilePointer());	/**写入entry*/
 				readerConf.writeInt(0);								/**写入状态*/
-				readerConf.writeUTF(wt.english);						/**写入英文释义*/
+				readerConf.writeUTF(wt.english);					/**写入英文释义*/
 				readerConf.writeUTF(wt.chinese);					/**写入中文释义*/
 			}						
 		} 
 		
-		readerConf.seek(0);
+		
+		
+		
 		/**
 		 * @param testing_code
-		 * 
+		 * 	
+		 * 	readerConf.seek(0);
 		 * 	long temp = readerConf.readLong();
 		 *	while(readerConf.getFilePointer()<temp)
 		 *	{
@@ -135,6 +141,27 @@ public class ConfGeneratorForXML {
 		 *		System.out.print(readerConf.readUTF()+"-");
 		 *		System.out.println(readerConf.readUTF());
 		 *	}
+		 *	
+		 *
+		 *
+		 *	@param lexiconConfig
+		 *	8-623-623-1-0-0-nn
+			48-654-654-26-0-0-other
+			91-1442-1442-1-0-0-ad
+			131-1493-1493-1646-0-0-adj
+			172-73891-73891-15-0-0-conj
+			214-74504-74504-42-0-0-num
+			255-75972-75972-4281-0-0-n
+			294-239112-239112-9-0-0-int
+			335-239403-239403-1-0-0-v,,n
+			377-239435-239435-3-0-0-]n
+			417-239541-239541-329-0-0-adv
+			458-253621-253621-1-0-0-null
+			500-253642-253642-46-0-0-pron
+			542-255393-255393-1532-0-0-v
+			581-316091-316091-56-0-0-prep
+
+		 *	
 		 *
 		 */
 		readerConf.close();
