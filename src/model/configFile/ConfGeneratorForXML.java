@@ -100,8 +100,6 @@ public class ConfGeneratorForXML {
 			readerConf.seek(tempPoint);			/**返回当前单词的入口，继续操作*/
 			lexiconPointerMap.keySet().remove(lexiconPointerMap.get(key));
 			
-			System.out.println(key);
-			
 			List<WordTemp> wordList = lexicon.wordList;
 			
 			int wListLength = wordList.size();
@@ -117,7 +115,18 @@ public class ConfGeneratorForXML {
 		} 
 		
 		
-		
+		readerConf.seek(0);
+		long temp = readerConf.readLong();
+		while(readerConf.getFilePointer()<temp)
+		{
+				System.out.print(readerConf.readLong()+"-");
+		 		System.out.print(readerConf.readLong()+"-");
+		 		System.out.print(readerConf.readLong()+"-");
+		 		System.out.print(readerConf.readInt()+"-");
+		 		System.out.print(readerConf.readInt()+"-");
+		 		System.out.print(readerConf.readInt()+"-");
+		 		System.out.println(readerConf.readUTF());
+		 }
 		
 		/**
 		 * @param testing_code

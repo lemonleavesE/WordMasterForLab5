@@ -24,7 +24,9 @@ public class DicXMLHandler {
 		tagMap.put("english", "english");
 		tagMap.put("chinese", "chinese");
 		
-		new DicXMLHandler("dictionary.xml",tagMap).HandleXMLFlow();
+		//new DicXMLHandler("dictionary.xml",tagMap).HandleXMLFlow();
+		
+		new DicXMLHandler("dictionary.xml",tagMap).splitCharacteristic("n.,adj.,v.∆Ω√ÊÕº,∫√Õº");
 	}
 	
 	public DicXMLHandler(String dicXMLPath, Map<String, String> tagMap)
@@ -83,21 +85,15 @@ public class DicXMLHandler {
 	        		else if(contentNode.getNodeType() == Node.ELEMENT_NODE && contentNode.getNodeName().equals(chinesetag))
 	        		{
 	        			chinese = contentNode.getTextContent();
-	        			String []ar = contentNode.getTextContent().split("\\.");
-	        			if(ar.length < 2)
-	        			{
-	        				lexName = "other";
-	        			}
-	        			else
-	        			{
-	        				if(!ar[0].equals(""))
-	        					lexName = ar[0];
-	        				else
-	        					lexName = "null";
-	        			}
 	        		}
 	        	}
 	        	
+	        	List<String> charList = splitCharacteristic(chinese);
+	        	
+	        	for(int i = 0;i < charList.size();i++){
+	        	
+	        	lexName = charList.get(i);	
+	        		
 	        	if(lexMap.containsKey(lexName))
 	        	{
 	        		LexiconTemp temp = lexMap.get(lexName);
@@ -118,6 +114,7 @@ public class DicXMLHandler {
 	        		temp.lexName = lexName;
 	        		lexMap.put(lexName, temp);
 	        	}
+	        	}
 	        }
 	        
 		} catch (Exception e) {
@@ -133,11 +130,34 @@ public class DicXMLHandler {
 			else
 				e.printStackTrace();
 		}
-        
-        LexiconTemp temp = lexMap.get("n");
-        
         return lexMap;
 	}
+	
+	private List<String> splitCharacteristic(String chinese)
+	{
+		List<String> charList = new ArrayList<String>();
+		
+		String []tempArray = chinese.split("\\.,");
+		
+		int length = tempArray.length;
+		if(length > 1)
+		for(int i = 0;i < length-1;i++)
+		{
+			charList.add(tempArray[i]);
+		}
+		
+		String []tempArray1 = tempArray[length-1].split("\\.");
+		
+		charList.add(tempArray1[0]);
+		
+		//for(int i = 0;i < charList.size();i++)
+		//{
+		//	System.out.println(charList.get(i));
+		//}
+		
+		return charList;
+	}
+	
 }
 
 class LexiconTemp
