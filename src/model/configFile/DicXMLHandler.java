@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -16,6 +18,8 @@ public class DicXMLHandler {
 
 	private String dicXMLPath;
 	private Map<String, String> tagMap;
+	private Map<String, String> lexiconMap;
+	
 	
 	public static void main(String []arg)
 	{
@@ -26,13 +30,30 @@ public class DicXMLHandler {
 		
 		//new DicXMLHandler("dictionary.xml",tagMap).HandleXMLFlow();
 		
-		new DicXMLHandler("dictionary.xml",tagMap).splitCharacteristic("n.,adj.,v.∆Ω√ÊÕº,∫√Õº");
+		String []list =  new DicXMLHandler("dictionary.xml",tagMap).getLexiconList();
+		
+		for(String s : list)
+		{
+			System.out.println(s);
+		}
 	}
 	
 	public DicXMLHandler(String dicXMLPath, Map<String, String> tagMap)
 	{
 		this.dicXMLPath = dicXMLPath;
 		this.tagMap = tagMap;
+		
+		lexiconMap = new HashMap<String,String>();
+		
+		lexiconMap.put("n", "n");
+		lexiconMap.put("v", "v");
+		lexiconMap.put("adj", "adj");
+		lexiconMap.put("prep", "prep");
+		lexiconMap.put("pron", "pron");
+		lexiconMap.put("adv", "adv");
+		lexiconMap.put("num", "num");
+		lexiconMap.put("aux", "aux");
+		
 	}
 	
 	public Map<String, LexiconTemp> HandleXMLFlow()
@@ -93,26 +114,28 @@ public class DicXMLHandler {
 	        	for(int i = 0;i < charList.size();i++){
 	        	
 	        	lexName = charList.get(i);	
-	        		
-	        	if(lexMap.containsKey(lexName))
+	        	if(lexiconMap.containsValue(lexName))	
 	        	{
-	        		LexiconTemp temp = lexMap.get(lexName);
-	        		WordTemp tempW = new WordTemp();
-	        		tempW.chinese = chinese;
-	        		tempW.english = english;
-	        		temp.wordList.add(tempW);
-	        		lexMap.put(lexName, temp);
-	        	}
-	        	else
-	        	{
-	        		LexiconTemp temp = new LexiconTemp();
-	        		temp.wordList = new ArrayList<WordTemp>();
-	        		WordTemp tempW = new WordTemp();
-	        		tempW.chinese = chinese;
-	        		tempW.english = english;
-	        		temp.wordList.add(tempW);
-	        		temp.lexName = lexName;
-	        		lexMap.put(lexName, temp);
+	        		if(lexMap.containsKey(lexName))
+	        		{
+	        			LexiconTemp temp = lexMap.get(lexName);
+	        			WordTemp tempW = new WordTemp();
+	        			tempW.chinese = chinese;
+	        			tempW.english = english;
+	        			temp.wordList.add(tempW);
+	        			lexMap.put(lexName, temp);
+	        		}
+	        		else
+	        		{
+	        			LexiconTemp temp = new LexiconTemp();
+	        			temp.wordList = new ArrayList<WordTemp>();
+	        			WordTemp tempW = new WordTemp();
+	        			tempW.chinese = chinese;
+	        			tempW.english = english;
+	        			temp.wordList.add(tempW);
+	        			temp.lexName = lexName;
+	        			lexMap.put(lexName, temp);
+	        		}
 	        	}
 	        	}
 	        }
@@ -131,6 +154,18 @@ public class DicXMLHandler {
 				e.printStackTrace();
 		}
         return lexMap;
+	}
+	
+	public String[] getLexiconList()
+	{
+		String []tempList = new String[lexiconMap.values().toArray().length];
+		
+		for(int i = 0;i < tempList.length;i++)
+		{
+			tempList[i] = lexiconMap.values().toArray()[i].toString();
+		}
+		
+		return tempList;
 	}
 	
 	private List<String> splitCharacteristic(String chinese)
