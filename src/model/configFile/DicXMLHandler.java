@@ -13,7 +13,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
+/**
+ * @author mjq
+ * 
+ * 
+ * */
 public class DicXMLHandler {
 
 	private String dicXMLPath;
@@ -156,6 +160,9 @@ public class DicXMLHandler {
         return lexMap;
 	}
 	
+	/**
+	 * Get Lexicon list
+	 * */
 	public String[] getLexiconList()
 	{
 		String []tempList = new String[lexiconMap.values().toArray().length];
@@ -184,12 +191,6 @@ public class DicXMLHandler {
 		String []tempArray1 = tempArray[length-1].split("\\.");
 		
 		charList.add(tempArray1[0]);
-		
-		//for(int i = 0;i < charList.size();i++)
-		//{
-		//	System.out.println(charList.get(i));
-		//}
-		
 		return charList;
 	}
 	

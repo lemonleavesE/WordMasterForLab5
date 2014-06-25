@@ -1,0 +1,40 @@
+1、DicXMLHandler.java
+	(1)	DicXMLHandler() 构造器参数
+		a、参数：
+			dicXMLPath:String --- 传入XML文件的路径
+			tagMap:Map<String, String> --- XML文件的tag名称的Map(以 word chinese 和 english 为准)
+
+	(2)	HandleXMLFlow() 
+		a、参数：
+			无
+		b、返回值：
+			类型：Map<String, LexiconTemp>
+			说明：Map泛型前一项为词库名，后一项为对应词库Object，返回所有的词库和对应单词
+			
+			词库Object对应数据结构如下：
+				class LexiconTemp
+				{
+					public String lexName;
+					List<WordTemp> wordList;
+				}
+
+				class WordTemp
+				{
+					public String english;
+					public String chinese;
+				}
+	
+	(3)	getLexiconList()
+		a、参数：
+			无
+		b、返回值：
+			类型：String[]
+			说明：返回所有存在的词库名称
+
+2、ConfGeneratorForXML.java
+	(1)	generateConfig()
+		a、参数：
+			无
+		b、返回值：
+			类型：void(无)
+			说明：将XML中所有有效单词信息写入配置文件user.conf

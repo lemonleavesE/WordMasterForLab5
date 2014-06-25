@@ -14,10 +14,10 @@ public class ConfGeneratorForXML {
 	
 	public static void main(String []arg) throws Exception
 	{
-		generateConfig();
+		new ConfGeneratorForXML().generateConfig();
 	}
 	
-	private static void initConfig()
+	private void initConfig()
 	{
 		Map<String, String> tagMap = new HashMap<String, String>();
 		tagMap.put("list", "word");
@@ -26,7 +26,7 @@ public class ConfGeneratorForXML {
 		dxHandler = new DicXMLHandler("dictionary.xml",tagMap);
 	}
 	
-	public static void generateConfig() throws Exception
+	public void generateConfig() throws Exception
 	{
 		initConfig();
 		
