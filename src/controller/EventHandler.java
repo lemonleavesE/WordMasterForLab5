@@ -1,6 +1,7 @@
 package controller;
 
 import controller.object.*;
+import model.configFile.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -128,7 +129,7 @@ public class EventHandler implements Initializable
 		if(this.LexiconSelection.getValue() == null){
 			this.ShowAlertDialog("你肿么不选词库╭(╯^╰)╮");
 		}else{
-			String type = this.LexiconSelection.getValue().substring(0, 1);
+			String type = this.LexiconSelection.getValue();
 			if(Action.getInstance().chooseLexicon(type)){
 				this.ChartType.getSelectionModel().clearSelection();
 				this.InfoBarChart.setVisible(false);
@@ -148,7 +149,7 @@ public class EventHandler implements Initializable
 		if(this.LexiconSelection.getValue() == null ){
 			this.ShowAlertDialog("你肿么不选词库╭(╯^╰)╮");
 		}else{
-			if(Action.getInstance().chooseLexicon(this.LexiconSelection.getValue().substring(0, 1))){
+			if(Action.getInstance().chooseLexicon(this.LexiconSelection.getValue().toString())){
 				this.InitializeReciteSetting();
 				this.main_page.setVisible(false);
 				this.ReciteSetting.setVisible(true);
@@ -382,9 +383,9 @@ public class EventHandler implements Initializable
 	/*词库选择数据绑定*/
 	public void LexiconDataBinding(){
 		ObservableList <String> lexicons = FXCollections.observableArrayList();
-		for(int i = 0; i < 26; i++){
-			char c = (char) ('a' + i);
-			lexicons.add(c+"词库");	
+		String [] list = new ConfGeneratorForXML().getLexiconList();
+		for(int i = 0; i < list.length; i++){
+			lexicons.add(list[i]);	
 		}
 		this.LexiconSelection.setItems(lexicons);
 	}
