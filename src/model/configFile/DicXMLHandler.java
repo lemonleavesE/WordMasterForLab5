@@ -163,7 +163,7 @@ public class DicXMLHandler {
 	/**
 	 * Get Lexicon list
 	 * */
-	public String[] getLexiconList()
+	protected String[] getLexiconList()
 	{
 		String []tempList = new String[lexiconMap.values().toArray().length];
 		

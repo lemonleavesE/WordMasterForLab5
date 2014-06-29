@@ -24,17 +24,23 @@
 					public String chinese;
 				}
 	
+	
+
+2、ConfGeneratorForXML.java
+
+	(1) ConfGeneratorForXML() 构造器函数
+		a、说明：完成dicXMLHandler对象的初始化
+
+	(2)	generateConfig()
+		a、参数：
+			无
+		b、返回值：
+			类型：void(无)
+			说明：将XML中所有有效单词信息写入配置文件user.conf
+			
 	(3)	getLexiconList()
 		a、参数：
 			无
 		b、返回值：
 			类型：String[]
 			说明：返回所有存在的词库名称
-
-2、ConfGeneratorForXML.java
-	(1)	generateConfig()
-		a、参数：
-			无
-		b、返回值：
-			类型：void(无)
-			说明：将XML中所有有效单词信息写入配置文件user.conf

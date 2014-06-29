@@ -10,14 +10,18 @@ import java.util.Map.Entry;
 
 public class ConfGeneratorForXML {
 	
-	private static DicXMLHandler dxHandler;
+	private DicXMLHandler dxHandler;
 	
 	public static void main(String []arg) throws Exception
 	{
-		new ConfGeneratorForXML().generateConfig();
+		String [] list = new ConfGeneratorForXML().getLexiconList();
+		for(int i = 0;i < list.length;i++)
+		{
+			System.out.println(list[i]);
+		}
 	}
 	
-	private void initConfig()
+	public ConfGeneratorForXML()
 	{
 		Map<String, String> tagMap = new HashMap<String, String>();
 		tagMap.put("list", "word");
@@ -28,7 +32,6 @@ public class ConfGeneratorForXML {
 	
 	public void generateConfig() throws Exception
 	{
-		initConfig();
 		
 		Map<String, LexiconTemp> lexMap = dxHandler.HandleXMLFlow();
 		
@@ -154,26 +157,24 @@ public class ConfGeneratorForXML {
 		 *
 		 *
 		 *	@param lexiconConfig
-		 *	8-623-623-1-0-0-nn
-			48-654-654-26-0-0-other
-			91-1442-1442-1-0-0-ad
-			131-1493-1493-1646-0-0-adj
-			172-73891-73891-15-0-0-conj
-			214-74504-74504-42-0-0-num
-			255-75972-75972-4281-0-0-n
-			294-239112-239112-9-0-0-int
-			335-239403-239403-1-0-0-v,,n
-			377-239435-239435-3-0-0-]n
-			417-239541-239541-329-0-0-adv
-			458-253621-253621-1-0-0-null
-			500-253642-253642-46-0-0-pron
-			542-255393-255393-1532-0-0-v
-			581-316091-316091-56-0-0-prep
+		 *	8-334-334-342-0-0-adv
+			49-14981-14981-47-0-0-pron
+			91-16774-16774-1-0-0-aux
+			132-16818-16818-1605-0-0-v
+			171-80432-80432-1679-0-0-adj
+			212-154255-154255-42-0-0-num
+			253-155723-155723-58-0-0-prep
+			295-158008-158008-4445-0-0-n
 
 		 *	
 		 *
 		 */
 		readerConf.close();
 		
+	}
+	
+	public String[] getLexiconList()
+	{
+		return dxHandler.getLexiconList();
 	}
 }
