@@ -19,6 +19,7 @@ public class ConfGeneratorForXML {
 		{
 			System.out.println(list[i]);
 		}
+		new ConfGeneratorForXML().generateConfig();
 	}
 	
 	public ConfGeneratorForXML()
@@ -130,6 +131,15 @@ public class ConfGeneratorForXML {
 		 		System.out.print(readerConf.readInt()+"-");
 		 		System.out.println(readerConf.readUTF());
 		 }
+		int i = 0;
+		while(i < 10)
+			 {
+			 		System.out.print(readerConf.readLong()+"-");
+			 		System.out.print(readerConf.readInt()+"-");
+			 		System.out.print(readerConf.readUTF()+"-");
+			 		System.out.println(readerConf.readUTF());
+			 		i++;
+			 }
 		
 		/**
 		 * @param testing_code
@@ -165,7 +175,17 @@ public class ConfGeneratorForXML {
 			212-154255-154255-42-0-0-num
 			253-155723-155723-58-0-0-prep
 			295-158008-158008-4445-0-0-n
-
+			
+			334-0-aboard-adv.船(车)上
+			371-0-abreast-adv.并肩，并列
+			413-0-abroad-adv.国外，海外
+			454-0-abruptly-adv.突然地
+			491-0-absolutely-adv.绝对，完全
+			536-0-accidentally-adv.偶尔，附带
+			583-0-actively-adv.积极地，活跃地
+			632-0-actually-adv.实际上，居然
+			678-0-adequately-adv.恰当地
+			717-0-admittedly-adv.明白地
 		 *	
 		 *
 		 */

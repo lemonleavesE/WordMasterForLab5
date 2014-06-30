@@ -140,12 +140,13 @@ public class ConfGenerator
 			System.out.println(readerConf.readUTF());
 		}
 		int i = 0;
-		while(readerConf.getFilePointer()<readerConf.length())
+		while(i <= 10)
 		{
 			System.out.print(readerConf.readLong()+"-");
 			System.out.print(readerConf.readInt()+"-");
 			System.out.print(readerConf.readUTF()+"-");
 			System.out.println(readerConf.readUTF());
+			i++;
 		}
 		
 		readerConf.close();

@@ -94,7 +94,23 @@ public class WordHandler implements Observer
 			String tempChinese = readerConf.readUTF();
 			if(tempEnglish.startsWith("x"))
 				System.out.println(tempEnglish);
-			if(tempEnglish.startsWith(Lexicon.getInstance().getType()))
+			
+			List<String> typeList = splitCharacteristic(tempChinese);
+			boolean isType = false;
+			for(String temp : typeList)
+			{
+				if(temp.equals(Lexicon.getInstance().getType()))
+				{
+					isType = true;
+				}
+			}
+			
+			if(!isType && tempEnglish.startsWith(Lexicon.getInstance().getType()))
+			{
+				isType = true;
+			}
+			
+			if(isType)
 			{
 				
 				Word.getInstance().setWord(tempEntry, tempState, tempEnglish, tempChinese);
@@ -166,5 +182,24 @@ public class WordHandler implements Observer
 			count--;
 		}
 		return temp;
+	}
+	
+	private List<String> splitCharacteristic(String chinese)
+	{
+		List<String> charList = new ArrayList<String>();
+		
+		String []tempArray = chinese.split("\\.,");
+		
+		int length = tempArray.length;
+		if(length > 1)
+		for(int i = 0;i < length-1;i++)
+		{
+			charList.add(tempArray[i]);
+		}
+		
+		String []tempArray1 = tempArray[length-1].split("\\.");
+		
+		charList.add(tempArray1[0]);
+		return charList;
 	}
 }
